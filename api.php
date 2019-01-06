@@ -80,6 +80,11 @@
             $cust->setAddress($address);
             $cust->setId($customerID);
 
+            $customer = $cust->getCustomerDetailsById();
+            if(!is_object($customer)) {
+                $this->returnResponse(SUCCESS_RESPONSE, ['message' => 'Customer does not exist.']);
+            }
+
             $cust->setUpdatedBy($this->userID);
             $cust->setUpdatedAt(date('Y-m-d'));
 
@@ -97,8 +102,12 @@
             $customerID      = $this->validateParameter('customerID', $this->parameter['customerID'], INTEGER);
 
             $cust = new Customer();
-
             $cust->setId($customerID);
+
+            $customer = $cust->getCustomerDetailsById();
+            if(!is_object($customer)) {
+                $this->returnResponse(SUCCESS_RESPONSE, ['message' => 'Customer does not exist.']);
+            }
 
 
             if(!$cust->delete()){
@@ -117,7 +126,7 @@
             $cust->setId($customerId);
             $customer = $cust->getCustomerDetailsById();
             if(!is_object($customer)) {
-                $this->returnResponse(SUCCESS_RESPONSE, ['message' => 'Customer details not found.']);
+                $this->returnResponse(SUCCESS_RESPONSE, ['message' => 'Customer does not exist.']);
             }
             $response['customerId']     = $customer->id;
             $response['cutomerName']    = $customer->name;

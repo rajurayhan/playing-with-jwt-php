@@ -1,11 +1,17 @@
 <?php 
-    
+
+    use \Firebase\JWT\JWT;
     require_once('constant.php');
     class Rest {
         protected $request;
         protected $serviceName; 
         protected $parameter;
+        protected $dbConnect;
+        protected $userID;
         public function __construct(){
+            $db                 = new DbConnect;
+            $this->dbConnect    = $db->connect();
+
             if($_SERVER['REQUEST_METHOD'] !== 'POST'){
                 $this->throwError(METHOD_NOT_ALLOWED, 'Method Not Allowed.');
                 exit;
@@ -13,7 +19,36 @@
             $handler = fopen('php://input', 'r');
             $this->request = stream_get_contents($handler);
             $this->validateRequest();
-            //echo $request;
+
+            if('generatetoken' != strtolower($this->serviceName)){
+                $this->validateToken();
+            }
+
+        }
+
+        public function validateToken(){
+            try {
+                $token   = $this->getBearedToken();
+                $payLoad = JWT::decode($token, SECRET, ['HS256']);
+
+                $stmt = $this->dbConnect->prepare("SELECT * FROM users WHERE id = :userID");
+                $stmt->bindParam(":userID", $payLoad->userID);
+                $stmt->execute();
+
+                $user = $stmt->fetch(PDO::FETCH_OBJ);
+                if(!is_object($user)){
+                    $this->returnResponse(INVALID_USER_PASS, "User not Found");
+                    //exit;
+                }
+                if(!$user->active){
+                    $this->returnResponse(USER_NOT_ACTIVE, "User is not active. Please contact with Admin");
+                }
+
+                $this->userID = $payLoad->userID;
+
+            } catch (Exception $e) {
+                $this->throwError(ACCESS_TOKEN_ERROR, $e->getMessage());
+            }
         }
 
         public function validateRequest(){

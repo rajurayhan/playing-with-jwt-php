@@ -58,7 +58,7 @@
             $stmt = $this->dbConn->prepare($sql);
             $stmt->bindParam(':customerId', $this->id);
             $stmt->execute();
-            $customer = $stmt->fetch(PDO::FETCH_ASSOC);
+            $customer = $stmt->fetch(PDO::FETCH_OBJ);
             return $customer;
         }
         

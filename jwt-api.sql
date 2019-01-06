@@ -47,8 +47,8 @@ CREATE TABLE IF NOT EXISTS `customers` (
 --
 
 INSERT INTO `customers` (`id`, `name`, `email`, `mobile`, `address`, `created_at`, `updated_at`, `created_by`, `updated_by`) VALUES
-(1, 'Aajufa Akhter', 'customer@gmail.com', '019578144', 'Dhaka, Bangladesh', '2019-01-06', NULL, 1, NULL),
-(2, 'Aajufa Akhter', 'customer@gmail.com', '019578144', 'Dhaka, Bangladesh', '2019-01-06', NULL, 1, NULL);
+(1, 'Customer One', 'customer@gmail.com', '019578144', 'Dhaka, Bangladesh', '2019-01-06', NULL, 1, NULL),
+(2, 'Customer Two', 'customer@gmail.com', '019578144', 'Dhaka, Bangladesh', '2019-01-06', NULL, 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -72,8 +72,8 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `active`, `created_at`) VALUES
-(1, 'Raju Rayhan', 'raju@adboxbd.com', 'raju@2016', 1, '2019-01-03'),
-(2, 'CEO ADBL', 'ceo@adboxbd.com', 'ceo@2016', 0, '2019-01-05');
+(1, 'Raju Rayhan', 'raju@adbl.com', 'raju2016', 1, '2019-01-03'),
+(2, 'CEO ADBL', 'ceo@adbl.com', 'ceo2016', 0, '2019-01-05');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

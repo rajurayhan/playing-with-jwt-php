@@ -24,8 +24,8 @@
         function getMobile() { return $this->mobile; }
         function setUpdatedBy($updated_by) { $this->updated_by = $updated_by; }
         function getUpdatedBy() { return $this->updated_by; }
-        function setUpdatedOn($updated_at) { $this->updated_at = $updated_at; }
-        function getUpdatedOn() { return $this->updated_at; }
+        function setUpdatedAt($updated_at) { $this->updated_at = $updated_at; }
+        function getUpdatedAt() { return $this->updated_at; }
         function setCreatedBy($created_by) { $this->created_by = $created_by; }
         function getCreatedBy() { return $this->created_by; }
         function setCreatedAt($created_at) { $this->created_at = $created_at; }

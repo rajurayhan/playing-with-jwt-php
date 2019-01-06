@@ -67,6 +67,50 @@
             $this->returnResponse(SUCCESS_RESPONSE, $message);
         }
 
+        public function updateCustomer(){
+            $customerID      = $this->validateParameter('customerID', $this->parameter['customerID'], INTEGER);
+            $name       = $this->validateParameter('name', $this->parameter['name'], STRING, false);
+            $address    = $this->validateParameter('address', $this->parameter['address'], STRING, false);
+            $mobile     = $this->validateParameter('mobile', $this->parameter['mobile'], STRING, false);
+
+            $cust = new Customer();
+
+            $cust->setName($name);
+            $cust->setMobile($mobile);
+            $cust->setAddress($address);
+            $cust->setId($customerID);
+
+            $cust->setUpdatedBy($this->userID);
+            $cust->setUpdatedAt(date('Y-m-d'));
+
+            if(!$cust->update()){
+                $message = 'Opps! Something Went Wrong!';
+            }
+            else{
+                $message = "Update Success";
+            }
+
+            $this->returnResponse(SUCCESS_RESPONSE, $message);
+        }
+
+        public function deleteCustomer(){
+            $customerID      = $this->validateParameter('customerID', $this->parameter['customerID'], INTEGER);
+
+            $cust = new Customer();
+
+            $cust->setId($customerID);
+
+
+            if(!$cust->delete()){
+                $message = 'Opps! Something Went Wrong!';
+            }
+            else{
+                $message = "Deleted Success";
+            }
+
+            $this->returnResponse(SUCCESS_RESPONSE, $message);
+        }
+
         public function getCustomerDetails(){
             $customerId = $this->validateParameter('customerID', $this->parameter['customerID'], INTEGER);
             $cust = new Customer;

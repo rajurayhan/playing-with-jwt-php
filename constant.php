@@ -18,6 +18,8 @@
     define('API_PARAM_MUST_BE_ARRY', '107');
     define('API_DOES_NOT_EXIST', '108');
     define('INVALID_USER_PASS', '109');
+    define('USER_NOT_ACTIVE', '110');
+    define('JWT_PROCESS_ERROR', '111');
 
     define('SUCCESS_RESPONSE', '200');
     
